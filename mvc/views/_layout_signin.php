@@ -19,15 +19,15 @@
 
 <body class="white-bg-login">
 
-    <div class="col-md-4 col-md-offset-4 marg" style="margin-top:50px;">
-        <?php
-            if(count($siteinfos->photo)) {
-                echo "<center><img width='140' height='42' src=".base_url('uploads/images/'.$siteinfos->photo)." /></center>";
-            }
-        ?>
-        <!-- 
-        <center><h4><?php echo $siteinfos->sname; ?></h4></center> -->
+    <div class="signinpicture1" >
+        <img src = "<?=base_url("uploads/images/signinpicture1.png"); ?>" width="100%";>
     </div>
+
+    </div>
+
+
+
+
 
     <?php $this->load->view($subview); ?>
 

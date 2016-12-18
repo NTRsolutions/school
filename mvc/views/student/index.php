@@ -51,8 +51,8 @@
                                                     <?php }?>
                                                   <!--   <th class="col-sm-1"><?=$this->lang->line('student_status')?></th> -->
                                                    <?php  if (isset($set) &&  $set=="3"){?>
-							                           
-							                                 <th><?=$this->lang->line('student_status')?></th>	
+                                                       <th><?=$this->lang->line('student_email')?></th>
+                                                       <th><?=$this->lang->line('student_status')?></th>
 							                                                                         
                                                     <?php }?>  
                                                   
@@ -193,8 +193,10 @@
                                                         <?php }?>
 
 	                                                   <?php  if (isset($set) &&  $set=="3"){?>
-								                           
-			                                                    <td data-title="<?=$this->lang->line('student_status')?>">
+                                                           <td data-title="<?=$this->lang->line('student_email')?>">
+                                                               <?php echo $student->email; ?>
+                                                           </td>
+                                                           <td data-title="<?=$this->lang->line('student_status')?>">
 			                                                            <div class="onoffswitch-small" id="<?=$student->studentID?>">
 			                                                                <input type="checkbox" id="myonoffswitch<?=$student->studentID?>" class="onoffswitch-small-checkbox" name="paypal_demo" <?php if($student->studentactive === '1') echo "checked='checked'"; ?>>
 			                                                                <label for="myonoffswitch<?=$student->studentID?>" class="onoffswitch-small-label">

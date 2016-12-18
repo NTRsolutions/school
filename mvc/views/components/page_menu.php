@@ -19,7 +19,7 @@
                                     <?php } elseif($usertype == "Student") { ?>
                                     <a href="<?=base_url("/student/view/".$this->session->userdata('loginuserID')."/3")?>">
                                         <?php } ?>
-                                        <img style="display:block" src="<?=base_url("uploads/images/wxadmin.png");
+                                        <img style="display:block;width: 100%;" src="<?=base_url("uploads/images/wxadmin.png");
                                         ?>"  alt="" /></a>
 
                             
@@ -33,8 +33,8 @@
                             font-size: 20px;
                             text-align: center;
                             margin-bottom: 10px;
-
-
+                            font-family: FZXiYuan-M01S;
+                            font-weight: bold;
                         }
 
 

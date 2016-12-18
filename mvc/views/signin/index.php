@@ -14,7 +14,7 @@
 </style>
 
 
-<div class="form-box" id="login-box">
+<div class="form-box">
     <div class="header"><?=$this->lang->line('signin')?></div>
     <div class="index-form">
         <form method="post">
@@ -43,10 +43,10 @@
                 }
                 ?>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Username" name="username" type="text" autofocus value="<?=set_value('username')?>">
+                    <input id="input-back" class="form-control" placeholder="Username" name="username" type="text" autofocus value="<?=set_value('username')?>">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Password" name="password" type="password">
+                    <input id="input-back" class="form-control" placeholder="Password" name="password" type="password" autocomplete="new-password">
                 </div>
 
 
@@ -62,7 +62,7 @@
                     </label>
                 </span>
                 </div>
-                <input type="submit" class="btn btn-lg btn-warning btn-block" value="登     录" />
+                <input type="submit" class="btn btn-lg btn-signin btn-block" value="登     录" />
             </div>
         </form>
     </div>

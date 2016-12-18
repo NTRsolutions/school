@@ -7,7 +7,7 @@
         <div class="profile-view-head">
             <a href="#">
                 <img style="display:block" src="<?=base_url("uploads/images/wxadmin.png");
-                ?>"  alt="" /></a>
+                ?>"  /></a>
             </a>
             <h1><?=$admin->name?></h1>
             <p><?=$this->lang->line($this->lang->line($admin->usertype))?></p>

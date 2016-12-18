@@ -1,5 +1,5 @@
 
-<div class="box box-teacher">
+<div class="box">
     <div class="box-header">
         <h3 class="box-title"><i class="fa icon-teacher"></i> <?=$this->lang->line('panel_title')?></h3>
 
@@ -15,82 +15,82 @@
             <div class="col-sm-12">
 
                 <?php
-                    $usertype = $this->session->userdata("usertype");
-                    if($usertype == "Admin" || $usertype == "TeacherManager" ){
-                ?>
-                <h5 class="page-header"><a href="<?php echo base_url('teacher/add') ?>"><i class="fa fa-plus"></i>
-                    <?=$this->lang->line('add_title')?></a>
-                </h5>
+                $usertype = $this->session->userdata("usertype");
+                if($usertype == "Admin" || $usertype == "TeacherManager" ){
+                    ?>
+                    <h5 class="page-header"><a href="<?php echo base_url('teacher/add') ?>"><i class="fa fa-plus"></i>
+                            <?=$this->lang->line('add_title')?></a>
+                    </h5>
 
                 <?php } ?>
 
                 <div id="hide-table">
                     <table id="example1" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
-                                <th class="col-sm-2"><?=$this->lang->line('slno')?></th>
-                                <!-- <th class="col-sm-2"><?=$this->lang->line('teacher_photo')?></th> -->
-                                <th class="col-sm-2"><?=$this->lang->line('teacher_name')?></th>
-                                <th class="col-sm-2"><?=$this->lang->line('teacher_type')?></th>
-                                <th class="col-sm-2"><?=$this->lang->line('teacher_email')?></th>
-                                <?php if($usertype == "Admin"){ ?>
+                        <tr>
+                            <th class="col-sm-2"><?=$this->lang->line('slno')?></th>
+                            <!-- <th class="col-sm-2"><?=$this->lang->line('teacher_photo')?></th> -->
+                            <th class="col-sm-2"><?=$this->lang->line('teacher_name')?></th>
+                            <th class="col-sm-2"><?=$this->lang->line('teacher_type')?></th>
+                            <th class="col-sm-2"><?=$this->lang->line('teacher_email')?></th>
+                            <?php if($usertype == "Admin" || $usertype == "TeacherManager"){ ?>
                                 <th class="col-sm-2"><?=$this->lang->line('teacher_status')?></th>
-                                <?php } ?>
-                                <th class="col-sm-2"><?=$this->lang->line('action')?></th>
-                            </tr>
+                            <?php } ?>
+                            <th class="col-sm-2"><?=$this->lang->line('action')?></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <?php if(count($teachers)) {$i = 1; foreach($teachers as $teacher) { ?>
-                                <tr>
-                                    <td id="teacher-no" data-title="<?=$this->lang->line('slno')?>">
-                                        <?php echo $i; ?>
-                                    </td>
-                                    <!-- <td data-title="<?=$this->lang->line('teacher_photo')?>">
+                        <?php if(count($teachers)) {$i = 1; foreach($teachers as $teacher) { ?>
+                            <tr>
+                                <td data-title="<?=$this->lang->line('slno')?>">
+                                    <?php echo $i; ?>
+                                </td>
+                                <!-- <td data-title="<?=$this->lang->line('teacher_photo')?>">
                                         <?php $array = array(
-                                                "src" => base_url('uploads/images/'.$teacher->photo),
-                                                'width' => '35px',
-                                                'height' => '35px',
-                                                'class' => 'img-rounded'
+                                    "src" => base_url('uploads/images/'.$teacher->photo),
+                                    'width' => '35px',
+                                    'height' => '35px',
+                                    'class' => 'img-rounded'
 
-                                            );
-                                            echo img($array);
-                                        ?>
+                                );
+                                echo img($array);
+                                ?>
                                     </td> -->
-                                    <td id="teacher-ming" data-title="<?=$this->lang->line('teacher_name')?>">
-                                        <?php echo $teacher->name; ?>
+                                <td data-title="<?=$this->lang->line('teacher_name')?>">
+                                    <?php echo $teacher->name; ?>
+                                </td>
+                                <td data-title="<?=$this->lang->line('teacher_type')?>">
+                                    <?php
+                                    $teachertype = $this->session->userdata("teacherType");
+                                    if($teacher->teachertype){
+                                        echo $teachertype[$teacher->teachertype];
+                                    }
+                                    ?>
+                                </td>
+                                <td data-title="<?=$this->lang->line('teacher_email')?>">
+                                    <?php echo $teacher->email; ?>
+                                </td>
+                                <?php if($usertype == "Admin" || $usertype == "TeacherManager"){ ?>
+                                    <td data-title="<?=$this->lang->line('teacher_status')?>">
+                                        <div class="onoffswitch-small" id="<?=$teacher->teacherID?>">
+                                            <input type="checkbox" id="myonoffswitch<?=$teacher->teacherID?>" class="onoffswitch-small-checkbox" name="paypal_demo" <?php if($teacher->teacheractive === '1') echo "checked='checked'"; ?>>
+                                            <label for="myonoffswitch<?=$teacher->teacherID?>" class="onoffswitch-small-label">
+                                                <span class="onoffswitch-small-inner"></span>
+                                                <span class="onoffswitch-small-switch"></span>
+                                            </label>
+                                        </div>
                                     </td>
-                                    <td id="teacher-class" data-title="<?=$this->lang->line('teacher_type')?>">
-                                        <?php 
-                                            $teachertype = $this->session->userdata("teacherType");
-                                            if($teacher->teachertype){
-                                                echo $teachertype[$teacher->teachertype]; 
-                                            }
-                                        ?>
-                                    </td>
-                                    <td id="teacher-mail" data-title="<?=$this->lang->line('teacher_email')?>">
-                                        <?php echo $teacher->email; ?>
-                                    </td>
-                                    <?php if($usertype == "Admin"){ ?>
-                                    <td id="teacher-state" data-title="<?=$this->lang->line('teacher_status')?>">
-                                      <div class="onoffswitch-small" id="<?=$teacher->teacherID?>">
-                                          <input type="checkbox" id="myonoffswitch<?=$teacher->teacherID?>" class="onoffswitch-small-checkbox" name="paypal_demo" <?php if($teacher->teacheractive === '1') echo "checked='checked'"; ?>>
-                                          <label for="myonoffswitch<?=$teacher->teacherID?>" class="onoffswitch-small-label">
-                                              <span class="onoffswitch-small-inner"></span>
-                                              <span class="onoffswitch-small-switch"></span>
-                                          </label>
-                                      </div>
-                                    </td>
-                                    <?php } ?>
-                                    <td data-title="<?=$this->lang->line('action')?>">
-                                        <?php
-                                            echo btn_view('teacher/view/'.$teacher->teacherID, $this->lang->line('view'));
-                                            if($usertype == "Admin" || $usertype == "TeacherManager" ) {
-                                                echo btn_edit('teacher/edit/'.$teacher->teacherID, $this->lang->line('edit'));
-                                                echo btn_delete('teacher/delete/'.$teacher->teacherID, $this->lang->line('delete'));
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
+                                <?php } ?>
+                                <td data-title="<?=$this->lang->line('action')?>">
+                                    <?php
+                                    echo btn_view('teacher/view/'.$teacher->teacherID, $this->lang->line('view'));
+                                    if($usertype == "Admin" || $usertype == "TeacherManager" ) {
+                                        echo btn_edit('teacher/edit/'.$teacher->teacherID, $this->lang->line('edit'));
+                                        echo btn_delete('teacher/delete/'.$teacher->teacherID, $this->lang->line('delete'));
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
                             <?php $i++; }} ?>
                         </tbody>
                     </table>
@@ -102,65 +102,65 @@
 </div><!-- /.box -->
 
 <script>
-  var status = '';
-  var id = 0;
-  $('.onoffswitch-small-checkbox').click(function() {
-      if($(this).prop('checked')) {
-          status = 'chacked';
-          id = $(this).parent().attr("id");
-      } else {
-          status = 'unchacked';
-          id = $(this).parent().attr("id");
-      }
+    var status = '';
+    var id = 0;
+    $('.onoffswitch-small-checkbox').click(function() {
+        if($(this).prop('checked')) {
+            status = 'chacked';
+            id = $(this).parent().attr("id");
+        } else {
+            status = 'unchacked';
+            id = $(this).parent().attr("id");
+        }
 
-      if((status != '' || status != null) && (id !='')) {
-          $.ajax({
-              type: 'POST',
-              url: "<?=base_url('teacher/active')?>",
-              data: "id=" + id + "&status=" + status,
-              dataType: "html",
-              success: function(data) {
-                  if(data == 'Success') {
-                      toastr["success"]("Success")
-                      toastr.options = {
-                        "closeButton": true,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "500",
-                        "hideDuration": "500",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                      }
-                  } else {
-                      toastr["error"]("Error")
-                      toastr.options = {
-                        "closeButton": true,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "500",
-                        "hideDuration": "500",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                      }
-                  }
-              }
-          });
-      }
-  });
+        if((status != '' || status != null) && (id !='')) {
+            $.ajax({
+                type: 'POST',
+                url: "<?=base_url('teacher/active')?>",
+                data: "id=" + id + "&status=" + status,
+                dataType: "html",
+                success: function(data) {
+                    if(data == 'Success') {
+                        toastr["success"]("Success")
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "500",
+                            "hideDuration": "500",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                    } else {
+                        toastr["error"]("Error")
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "500",
+                            "hideDuration": "500",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                    }
+                }
+            });
+        }
+    });
 </script>

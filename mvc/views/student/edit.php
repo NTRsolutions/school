@@ -25,8 +25,7 @@ span.label {
 ?>
 <div class="box box-student">
     <div class="box-header">
-        <h3 class="box-title"><i class="fa icon-student"></i> <?=$this->lang->line('panel_title')?></h3>
-
+		<h3 class="box-title"><i class="fa icon-student"></i> <?=$this->lang->line('edit')?></h3>
        
         <ol class="breadcrumb">
             <li><a href="<?=base_url("dashboard/index")?>"><i class="fa fa-laptop"></i> <?=$this->lang->line('menu_dashboard')?></a></li>
@@ -34,9 +33,9 @@ span.label {
                 if($usertype <> "Student") {
                 ?>
             <li><a href="<?=base_url("student/index/$set")?>"><?=$this->lang->line('menu_student')?></a></li>
-            <?php } ?> 
-            <li class="active"><?=$this->lang->line('menu_edit')?> <?=$this->lang->line('panel_title')?></li>
-        </ol>
+            <?php } ?>
+			<li class="active"> <?=$this->lang->line('edit')?></li>
+		</ol>
     </div><!-- /.box-header -->
 
     <!-- form start -->
@@ -50,8 +49,8 @@ span.label {
 	                      <?php $this->load->view("student/customerinfo"); ?>				 
 
                           <?php
-                            if($usertype == "Admin" || $usertype == "Teacher" || $usertype == "TeacherManager") {
-                            ?>
+						  if($usertype == "Admin" || $usertype == "Receptionist" || $usertype == "TeacherManager"|| $usertype == "Salesman") {
+							  ?>
 	                        <?php if ($student->classesID <> '1' || (isset($state) && $state == "join")) { ?>                    
 						   		<!-- 调用添加客户情报界面 -->
 	                      		<?php $this->load->view("student/joininfo"); ?>				 

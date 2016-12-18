@@ -38,7 +38,7 @@
                 <input class="form-control" placeholder="Email" name="email" type="text">
             </div>   
 
-            <input type="submit" class="btn btn-lg btn-warning btn-block" value="Send" />
+            <input type="submit" class="btn btn-lg btn-signin btn-block" value="Send" />
         </div>
     </form>
 </div>

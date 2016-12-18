@@ -34,8 +34,6 @@
                         <div id="header-right">
                             <div class="fc-button-group">
                                 <button id="cus-button-month" type="button" class="btn btn-default">月</button>
-                                <button id="cus-button-week" type="button" class="btn btn-default">周</button>
-                                <button id="cus-button-day" type="button" class="btn btn-default"> 日 </button>
                             </div>
                         </div>
 
@@ -54,6 +52,7 @@
   <style>
     .fc-event{
         font-size: 14px;
+        font-family: FZXiYuan-M01S;
     }
     .fc-event:hover{
         font-size: 16px;
@@ -61,13 +60,13 @@
     }
 
     #custom-header {
-        margin-left: 13%;
-        width: 78%;
+        margin-left: 4%;
+        width: 100%;
         position: absolute;
         top: 15px;
         color: #5fa7d8;
         column-count: 3;
-        font-family: Helvetica;
+        font-family:FZXiYuan-M01S;
         font-weight: bolder;
     }
 
@@ -93,7 +92,9 @@
           margin-left: 60%;
       }
 
-
+    #calendar{
+        padding-top: 3%;
+    }
 
 
   </style>
@@ -119,46 +120,30 @@
                 center: '',
                 right: 'month,agendaWeek,agendaDay'
             },
-            eventLimit: true,
+            eventLimit: false,
     		events: [
                 <?php
-                    $var = array();
-                    foreach ($routines as $routine) {
-                        $subject_teacher_details = $this->subject_teacher_details_m->get_by_subjectID($routine->subjectID);
-                        $teacherNames = ' ';
-                        foreach($subject_teacher_details as $item) {
-                            $teacher = $this->teacher_m->get_teacher($item->teacherID);
-                            if($teacher){
-                                $teacherNames = $teacherNames.' | '.$teacher->name;
-                            }else{
-                                $teacherNames = $teacherNames.' | '.$item->name;
-                            }
+
+                foreach ($routines as $routine) {
+                    $subject_teacher_details = $this->subject_teacher_details_m->get_by_subjectID($routine->subjectID);
+                    $teacherNames = ' ';
+                    foreach($subject_teacher_details as $item) {
+                        $teacher = $this->teacher_m->get_teacher($item->teacherID);
+                        if($teacher){
+                            $teacherNames = $teacherNames.' | '.$teacher->name;
+                        }else{
+                            $teacherNames = $teacherNames.' | '.$item->name;
                         }
-
-                        if (array_key_exists($routine->date, $var)) {
-                            $var[$routine->date] ++;
-                        }else  {
-                            $var[$routine->date] = 1;
-                        }
-
-
-//                        echo '{';
-//                            echo "id: '".$routine->routineID."', ";
-//                            echo "title: '有".$var[$routine->date]."门课程', ";
-//                            echo "start: '".$routine->date."T".$routine->start_time."', ";
-//                            echo "end: '".$routine->date."T".$routine->end_time."', ";
-//                            echo "textColor:'#FF00FF',";
-//                            echo "color: '".$routine->color."', ";
-//                        echo '},';
                     }
-
-                    foreach ($var as $key => $value) {
-                        echo '{';
-                        echo "title: '有".$value."门课程', ";
-                        echo "start: '".$key."', ";
-                        echo "color: 'transparent', ";
-                        echo '},';
-                    }
+                    echo '{';
+                    echo "id: '".$routine->routineID."', ";
+                    echo "title: '".$routine->subject." ".$routine->room.$teacherNames."', ";
+                    echo "start: '".$routine->date."T".$routine->start_time."', ";
+                    echo "end: '".$routine->date."T".$routine->end_time."', ";
+                    echo "color:'#FFF',";
+                    echo "textColor: '".$routine->color."', ";
+                    echo '},';
+                }
 
                 ?>
             ],
@@ -219,6 +204,7 @@
         $('#cus-button-today').click(function() {
             $('#calendar').fullCalendar('today');
         });
+
 
 
 

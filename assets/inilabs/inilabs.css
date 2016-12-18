@@ -42,6 +42,7 @@
 .navbar-nav > .user-menu > .dropdown-menu > li.user-footer > div.text-center > a {
   color: #fff;
     font-weight: bold;
+    font-family: FZXiYuan-M01S;
 }
 /* User Image & Login Close */
 
@@ -104,11 +105,12 @@
   font-size: 14px;
   border-bottom: 1px solid #ffffff;
   color: #5fa7d8;
+    font-family: FZXiYuan-M01S;
 }
 
 .page-header > a:hover {
-  border-bottom: 1px solid #1A2229;
-  color: #1A2229;
+  border-bottom: 1px solid #1f5f8c;
+  color: #1f5f8c;
 }
 /* page Header Add Module */
 
@@ -116,11 +118,13 @@
 .form-horizontal .control-label {
   text-align: left;
   font-size: 12px;
+    font-family: FZXiYuan-M01S;
 }
 
 label {
   font-weight: 000;
   color: #000000;
+    font-family: FZXiYuan-M01S;
 }
 /* Lable Close */
 
@@ -141,7 +145,8 @@ label {
   font-weight: 300;
 }
 .table-bordered > tbody > tr > td {
-  color: #707070;
+  color: #000000;
+    font-family: FZXiYuan-M01S;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > td {
@@ -289,16 +294,21 @@ label {
 /* Login Start */
 /*test*/
 .white-bg-login {
-    background: none repeat scroll 0 0 rgba(255, 255, 255, 0);
+    background-image: url('../../uploads/images/signinback.png');
+    position: relative;
 }
+
+
+
 .form-box .header {
     background: none repeat scroll 0 0 transparent;
     border: 3px solid;
-    border-color: #5fa7d8;
+    border-color: #ffffff;
+    margin-bottom: -3px;
 }
 
 .form-box > .header {
-  margin-top: 120px;
+  margin-top: 160px;
 }
 
 .form-box .body, .form-box .footer {
@@ -313,6 +323,11 @@ label {
     box-shadow: 0 0 0 rgba(255, 255, 255, 0) inset;
 }
 
+#input-back {
+    background: transparent;
+    border-color: #ffffff;
+}
+
 .checkbox > label > input[type="checkbox"] {
     float: left;
     padding: 0px;
@@ -320,19 +335,30 @@ label {
 }
 
 .checkbox > label > span {
-  color: #ffffff;
+  color: #f3f3f3;
+    font-family: FZXiYuan-M01S;
 }
 
 .checkbox > span > label > a {
-  color: #ffffff;
+  color: #f3f3f3;
+    font-family: FZXiYuan-M01S;
 }
 /* Login Close */
 
 /* Button Margin ex: edit, delete, view Start */
 .mrg {
-  margin-left: 2px;
+
+    margin-left: 2px;
   margin-right: 2px;
+    width:25px;
+    height: 25px;
+
 }
+
+#pay{
+    height:33px;
+}
+
 /* Button Margin ex: edit, delete, view Close */
 
 /* File Browse Start */
@@ -401,10 +427,12 @@ label {
     font-size: 22px;
     font-weight: 300;
     margin-bottom: 5px;
+    font-family: FZXiYuan-M01S;
 }
 
 .profile-view-head p {
     font-size: 12px;
+    font-family: FZXiYuan-M01S;
 }
 
 .profile-view-dis {
@@ -422,6 +450,7 @@ label {
 .profile-view-dis p {
     color: #000000;
     font-size: 15px;
+    font-family: FZXiYuan-M01S;
 }
 
 .profile-view-tab {
@@ -434,6 +463,11 @@ label {
 .profile-view-tab p span {
     display: inline-block;
     width: 40%;
+}
+
+#time{
+    background: #5fa7d8;
+    color: #ffffff;
 }
 
 /* Biograph Close */
@@ -494,12 +528,15 @@ label {
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
+    font-family: FZXiYuan-M01S;
 }
 
 .btn-cs:hover {
-  background-color: #ED857E;
+  background-color: #ffcd8d;
   color: #EDEDED;
 }
+
+
 
 .btn-sm-cs {
     border-radius: 3px;

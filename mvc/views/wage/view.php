@@ -121,7 +121,7 @@
                                            if($wage->status == 5)
                                            	echo "<button class='btn btn-warning btn-xs'>".$wageCalcStatus[$wage->status]."</button>";
                                            elseif($wage->status == 6)
-                                           echo "<button class='btn btn-danger btn-xs'>".$wageCalcStatus[$wage->status]."</button>";                                            
+                                           echo "<button class='btn btn-irrecognize btn-xs'>".$wageCalcStatus[$wage->status]."</button>";
                                            elseif($wage->status == 4)
                                            echo "<button class='btn btn-info btn-xs'>".$wageCalcStatus[$wage->status]."</button>";
                                            else{

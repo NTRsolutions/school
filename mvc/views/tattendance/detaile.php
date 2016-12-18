@@ -14,62 +14,73 @@
             <div class="col-sm-12">
 
                 <?php
-                
-                  $usertype = $this->session->userdata("usertype");
-                    if($usertype == "Admin" || $usertype == "Teacher" || $usertype == "TeacherManager" || $usertype == "Receptionist"|| $usertype == "Salesman") {
-                ?>
+
+                $usertype = $this->session->userdata("usertype");
+                if($usertype == "Admin" || $usertype == "Teacher" || $usertype == "TeacherManager" || $usertype == "Receptionist"|| $usertype == "Salesman") {
+                    ?>
                     <h5 class="page-header">
+                        <?php
+                        if($usertype == "Admin" || $usertype == "TeacherManager" ) {
+                            ?>
+                            <a href="<?php echo base_url('tattendance/index/1') ?>" style=" margin-right: 10px;">
+                                <i class="fa fa-chevron-left"></i>
+                                返回
+                            </a>
+                            <span> </span>
+                            <?php
+                        }
+                        ?>
                         <a href="<?php echo base_url('tattendance/add') ?>">
                             <i class="fa fa-plus"></i>
                             <?=$this->lang->line('add_title')?>
                         </a>
                     </h5>
-                <div class="col-sm-8 col-sm-offset-2 list-group">
-                    <div class="list-group-item list-group-item-warning">
-                        <form style="" class="form-horizontal" role="form" method="post">
-                            <div class="form-group">
-                                <label for="date_from" class="col-sm-2 col-sm-offset-2 control-label">考勤区间 </label>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="date_from" name="date_from" value="<?=set_value('date_from', $date_from)?>" >
-                                        <span class="input-group-addon">
+                    <div class="col-sm-8 col-sm-offset-2 list-group">
+                        <div class="list-group-item list-group-item-warning">
+                            <form style="" class="form-horizontal" role="form" method="post">
+                                <div class="form-group">
+                                    <label for="date_from" class="col-sm-2 col-sm-offset-2 control-label">考勤区间 </label>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="date_from" name="date_from" value="<?=set_value('date_from', $date_from)?>" >
+                                            <span class="input-group-addon">
                                             ~
                                         </span>
-                                        <input type="text" class="form-control" id="date_to" name="date_to" value="<?=set_value('date_to', $date_to)?>" >
+                                            <input type="text" class="form-control" id="date_to" name="date_to" value="<?=set_value('date_to', $date_to)?>" >
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="verify_status" class="col-sm-2 col-sm-offset-2 control-label">
-                                    <?=$this->lang->line('tattendance_status')?>
-                                </label>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <label class="checkbox-inline" for="verify_status">
-                                        <?php
-                                            $check = '';
-                                            if($verify_status === "0"){
-                                                $check = 'checked';
-                                            }
-                                        ?>
-										 <input type="checkbox" name="verify_status" id="verify_status" value="0" <?=$check?>>
-											<?=$this->lang->line('attendance_verify_ng')?>
+                                <div class="form-group">
+                                    <label for="verify_status" class="col-sm-2 col-sm-offset-2 control-label">
+                                        <?=$this->lang->line('tattendance_status')?>
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
+                                            <label class="checkbox-inline" for="verify_status">
+                                                <?php
+                                                $check = '';
+                                                if($verify_status === "0"){
+                                                    $check = 'checked';
+                                                }
+                                                ?>
+                                                <input type="checkbox" name="verify_status" id="verify_status" value="0" <?=$check?>>
+                                                <?=$this->lang->line('attendance_verify_ng')?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-								<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-5">
-								 <button type="submit" id="search" class="btn btn-warning">查询</button>
-								 </div>
-								</div>
-                        </form>
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-5">
+                                        <button type="submit" id="search" class="btn btn-warning">查询</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
 
-                <div id="hide-table">
-                    <table id="example1" class="table table-striped table-bordered table-hover dataTable no-footer">
-                        <thead>
+                    <div id="hide-table">
+                        <table id="example1" class="table table-striped table-bordered table-hover dataTable no-footer">
+                            <thead>
                             <tr>
                                 <th class="col-sm-1"><?=$this->lang->line('tattendance_name')?></th>
                                 <th class="col-sm-1"><?=$this->lang->line('tattendance_date')?></th>
@@ -82,22 +93,31 @@
                                 <th class="col-sm-1"><?=$this->lang->line('tattendance_status')?></th>
                                 <th class="col-sm-1"><?=$this->lang->line('tattendance_note')?></th>
 
-                                <?php // if($usertype != "Teacher") { ?><th class="col-sm-2"><?=$this->lang->line('action')?></th><?php // }?>
+                                <?php // if($usertype != "Teacher") { ?>
+                                <th class="col-sm-2">
+                                    <?=$this->lang->line('action')?>
+                                    <?php
+                                    if($usertype == "Admin" || $usertype == "TeacherManager" ) {
+                                        echo btn_verify('tattendance/verify_all/'.$teachers->teacherID, '全部承认', '将承认全部未承认记录，确认是否承认?', '全部承认');
+                                    }
+                                    ?>
+                                </th>
+                                <?php // }?>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <?php if(count($teachers)) {
-                              	    $i = 1;
-                            	    $t = array();
-                            	   if(count($teachers) == 1){
-                            	      $t[] = $teachers;
-                            	   }else{
-                            	   	$t = $teachers;
-                            	   }
+                                $i = 1;
+                                $t = array();
+                                if(count($teachers) == 1){
+                                    $t[] = $teachers;
+                                }else{
+                                    $t = $teachers;
+                                }
 
-                            foreach($t as $teacher) {
-                            ?>
-                            <?php
+                                foreach($t as $teacher) {
+                                    ?>
+                                    <?php
                                     $array = array(
                                         'teacherID' => $teacher->teacherID,
                                         'date >=' => date('Y-m-d', strtotime($date_from)),
@@ -107,11 +127,11 @@
                                     }
                                     $attendances = $this->tattendance_m->get_order_by_tattendance($array);
                                     if(count($attendances)) {$i = 1; foreach($attendances as $key => $attendance) {
-                            ?>
+                                        ?>
                                         <tr>
                                             <td data-title="<?=$this->lang->line('slno')?>">
                                                 <?php
-                                                    echo '<a href="'.'view/'.$teacher->teacherID.'">'.$teacher->name.'</a>'
+                                                echo '<a href="'.'view/'.$teacher->teacherID.'">'.$teacher->name.'</a>'
                                                 ?>
                                             </td>
 
@@ -123,24 +143,24 @@
                                             </td>
                                             <td>
                                                 <?php
-                                               
-                                                  date_default_timezone_set("UTC");
-                                                  
-                                                  $workingHours =  $this->wage_m->quarter_round(date("H:i", strtotime($attendance->end_time) - strtotime($attendance->start_time)),0);
-                                                  
-                                                  echo $workingHours."時間";
-                                                  
+
+                                                date_default_timezone_set("UTC");
+
+                                                $workingHours =  $this->wage_m->quarter_round(date("H:i", strtotime($attendance->end_time) - strtotime($attendance->start_time)),0);
+
+                                                echo $workingHours."時間";
+
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 $timing_remuneration = 0;
                                                 if($attendance->tattendancetype == "1"){
-                                                    $timing_remuneration = $teacher->affairs_timing_remuneration;
+                                                    $timing_remuneration = $teacher->lecture_timing_remuneration;
                                                 }else if($attendance->tattendancetype == "2"){
-													$timing_remuneration = $teacher->affairs_timing_remuneration;
+                                                    $timing_remuneration = $teacher->affairs_timing_remuneration;
                                                 }else if($attendance->tattendancetype == "3"){
-													$timing_remuneration = $teacher->affairs_timing_remuneration;
+                                                    $timing_remuneration = $teacher->vip_timing_remuneration;
                                                 }
                                                 echo $timing_remuneration."円/時";
                                                 ?>
@@ -148,64 +168,70 @@
                                             <td>
                                                 <?php
                                                 if($attendance->verifyflg == '0'){
-													echo $timing_remuneration * $workingHours."円";                                                	
+
+                                                    if($attendance->wage == 0){
+                                                        echo $timing_remuneration * $workingHours."円";
+                                                    }else{
+                                                        echo $attendance->wage."円(※修改)";
+                                                    }
+
                                                 }else{
-                                                	echo $attendance->wage."円"; 
+                                                    echo $attendance->wage."円";
                                                 }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
-                                                    echo $attendance->teacher_transport_amount."円";
+                                                echo $attendance->teacher_transport_amount."円";
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
-                                                    $tattendanceType = $this->session->userdata("tattendanceType");
-                                                    if($attendance->tattendancetype){
-                                                        echo $tattendanceType[$attendance->tattendancetype];
-                                                    }
+                                                $tattendanceType = $this->session->userdata("tattendanceType");
+                                                if($attendance->tattendancetype){
+                                                    echo $tattendanceType[$attendance->tattendancetype];
+                                                }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
-                                                    if($attendance->verifyflg == '1') {
-                                                        echo "<button class='btn btn-success btn-xs'>".$this->lang->line('attendance_verify_ok')."</button>";
+                                                if($attendance->verifyflg == '1') {
+                                                    echo "<button class='btn btn-success btn-xs'>".$this->lang->line('attendance_verify_ok')."</button>";
+                                                }else{
+                                                    echo "<button class='btn btn-danger btn-xs'>".$this->lang->line('attendance_verify_ng')."</button>";
+                                                }
+
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+
+                                                echo $attendance->work_note;
+                                                ?>
+                                            </td>
+
+                                            <td>
+                                                <?php
+                                                if($usertype == "Admin" || $usertype == "TeacherManager" ) {
+                                                    if($attendance->verifyflg == '0'){
+                                                        echo btn_verify('tattendance/verify/'.$attendance->tattendanceID.'/1/'.$teacher->teacherID, $this->lang->line('attendance_verify'), $this->lang->line('attendance_verify_msg_ok'));
                                                     }else{
-                                                        echo "<button class='btn btn-danger btn-xs'>".$this->lang->line('attendance_verify_ng')."</button>";
+                                                        echo btn_verify_cancel('tattendance/verify/'.$attendance->tattendanceID.'/0/'.$teacher->teacherID, '承认取消', '承认取消');
                                                     }
-
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
- 
-                                                        echo $attendance->work_note;
+                                                }
+                                                if($attendance->verifyflg == '0'){
+                                                    echo btn_delete('tattendance/delete/'.$attendance->tattendanceID, $this->lang->line('delete'));
+                                                    echo btn_edit('tattendance/edit/'.$attendance->tattendanceID, $this->lang->line('edit'));
+                                                }
                                                 ?>
                                             </td>
 
-                                            <td>
-                                                <?php
-                                                  if($usertype == "Admin" || $usertype == "TeacherManager" ) {
-														if($attendance->verifyflg == '0'){
-															echo btn_verify('tattendance/verify/'.$attendance->tattendanceID.'/1/'.$teacher->teacherID, $this->lang->line('attendance_verify'), $this->lang->line('attendance_verify_msg_ok'));
-														}else{
-															echo btn_verify_cancel('tattendance/verify/'.$attendance->tattendanceID.'/0/'.$teacher->teacherID, '承认取消', '承认取消');
-														}
-												   }	
-												  if($attendance->verifyflg == '0'){
-														  echo btn_delete('tattendance/delete/'.$attendance->tattendanceID, $this->lang->line('delete'));														 
-                                                          echo btn_edit('tattendance/edit/'.$attendance->tattendanceID, $this->lang->line('edit'));
-                                                   } 
-                                                ?>
-                                            </td>
-                                           
-                                    </tr>
+                                        </tr>
+                                        <?php $i++; }} ?>
                                     <?php $i++; }} ?>
-                            <?php $i++; }} ?>
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php } ?>
 
             </div> <!-- col-sm-12 -->
